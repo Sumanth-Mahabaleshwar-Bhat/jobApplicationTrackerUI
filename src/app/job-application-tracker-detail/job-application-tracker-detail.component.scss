@@ -1,0 +1,23 @@
+.save-jobApplication-Button, .delete-jobApplication-Button, .close-jobApplication-Button, mat-form-field {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+.row {
+    display: flex;
+}
+
+.row, .col {
+    flex: 1;
+    margin-right: 10px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.save-jobApplication-Button, .delete-jobApplication-Button, .close-jobApplication-Button {
+    width: 10%;
+}

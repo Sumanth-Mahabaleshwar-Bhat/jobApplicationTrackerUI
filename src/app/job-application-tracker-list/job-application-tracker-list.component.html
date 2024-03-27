@@ -1,0 +1,38 @@
+<button mat-raised-button (click)="createNewJobApplication()" class="add-new-jobApplication-button">
+    <mat-icon>
+        <span class="material-symbols-outlined">add_circle</span>
+    </mat-icon>
+    Add New Job Application
+</button>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="jobRequisitionId">
+        <th mat-header-cell *matHeaderCellDef> Job Requisition Id </th>
+        <td mat-cell *matCellDef="let job"> {{job.jobRequisitionId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="jobTitle">
+        <th mat-header-cell *matHeaderCellDef> Job Title </th>
+        <td mat-cell *matCellDef="let job"> {{job.jobTitle}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="jobPostedDate">
+        <th mat-header-cell *matHeaderCellDef> Job Posted Date </th>
+        <td mat-cell *matCellDef="let job"> {{job.jobPostedDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="jobDeadlineDate">
+        <th mat-header-cell *matHeaderCellDef> Job Deadline Date </th>
+        <td mat-cell *matCellDef="let job"> {{job.jobDeadlineDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="applicationStatus">
+        <th mat-header-cell *matHeaderCellDef> Application Status </th>
+        <td mat-cell *matCellDef="let job"> {{job.applicationStatus}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of Job Applications"></mat-paginator>

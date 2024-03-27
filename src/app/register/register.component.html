@@ -1,0 +1,33 @@
+<div class="register-container">
+    <div class="container">
+        <form class="register-form" [formGroup]="signupForm">
+            <mat-card class="register-box">
+                <mat-card-header>
+                    <img mat-card-avatar src="../../assets/user.png" alt="User Logo">
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        <mat-form-field>
+                            <input matInput type="email" id="email" placeholder="Enter your Email address" formControlName="username" required>
+                            <mat-icon matSuffix>mail</mat-icon>
+                            <mat-error *ngIf="signupForm.get('username')?.hasError('required')">Email is required</mat-error>
+                            <mat-error *ngIf="signupForm.get('username')?.hasError('email')">Invalid Email format</mat-error> 
+                        </mat-form-field>
+                    </p>
+
+                    <p>
+                        <mat-form-field>
+                            <input matInput type="password" id="password" placeholder="Enter your Password" formControlName="password" required>
+                            <mat-icon matSuffix>password</mat-icon>
+                            <mat-error *ngIf="signupForm.get('password')?.hasError('required')">Password is required</mat-error>
+                            <mat-error *ngIf="signupForm.get('password')?.hasError('minlength')">Password should be atleast 6 characters long</mat-error> 
+                        </mat-form-field>
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="onSubmit()">Sign Up</button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </div>
+</div>
