@@ -1,4 +1,4 @@
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule, DatePipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth.service';
 import { JobApplicationTrackerService } from './services/job-application-tracker.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -31,8 +32,9 @@ import { JobApplicationTrackerService } from './services/job-application-tracker
     MatCardModule,
     HttpClientModule,
     RegisterComponent,
-    JobApplicationTrackerListComponent],
-  providers: [AuthService, JobApplicationTrackerService],
+    JobApplicationTrackerListComponent,
+    MatSnackBarModule],
+  providers: [AuthService, JobApplicationTrackerService, DatePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

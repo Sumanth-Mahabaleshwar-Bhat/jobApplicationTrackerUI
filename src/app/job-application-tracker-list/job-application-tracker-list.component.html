@@ -1,3 +1,22 @@
+<header class="header">
+    <h1 class="header-title"> Job Application List Screen </h1>
+    <div class="spacer"></div>
+    <div class="menu-container">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onLogout()">
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+            </button>
+        </mat-menu>    
+    </div>
+</header>
+
+<br>
+
 <button mat-raised-button (click)="createNewJobApplication()" class="add-new-jobApplication-button">
     <mat-icon>
         <span class="material-symbols-outlined">add_circle</span>
@@ -32,7 +51,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row (click)="navigateToJobApplicationDetail(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of Job Applications"></mat-paginator>

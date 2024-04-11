@@ -1,11 +1,11 @@
-<button mat-raised-button class="save-jobApplication-Button">
+<button mat-raised-button class="save-jobApplication-Button" (click)="onSaveJobApplicationForm()">
     <mat-icon>
         <span class="material-symbols-outlined">save</span>
     </mat-icon>
     Save
 </button>
 
-<button mat-raised-button class="delete-jobApplication-Button">
+<button mat-raised-button class="delete-jobApplication-Button" (click)="onDeleteJobApplication()">
     <mat-icon>
         <span class="material-symbols-outlined">delete</span>
     </mat-icon>
@@ -19,28 +19,28 @@
     Close
 </button>
 
-<form class="job-Application-Form">
+<form [formGroup]="jobApplicationForm" class="job-Application-Form">
     <div class="container">
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Enter Job Requisition ID</mat-label>
-                    <input type="text" matInput placeholder="Job Requisition ID">
+                    <mat-label for="jobRequisitionId">Enter Job Requisition ID</mat-label>
+                    <input type="text" matInput placeholder="Job Requisition ID" id="jobRequisitionId" formControlName="jobRequisitionId">
+                    <mat-error *ngIf="jobApplicationForm.get('jobRequisitionId')?.hasError('required')">Job Requisition ID is required</mat-error>
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Enter Job Title</mat-label>
-                    <input type="text" matInput placeholder="Job Title">
+                    <mat-label for="jobTitle">Enter Job Title</mat-label>
+                    <input type="text" matInput placeholder="Job Title" id="jobTitle" formControlName="jobTitle">
+                    <mat-error *ngIf="jobApplicationForm.get('jobTitle')?.hasError('required')">Job Title is required</mat-error>
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field>
-                    <mat-label>Enter Type of Job</mat-label>
-                    <mat-select>
-                        <mat-option value="partTime">Part Time</mat-option>
-                        <mat-option value="fullTime">Full Time</mat-option>
-                        <mat-option value="contract">Contract</mat-option>
+                    <mat-label for="jobType">Choose Type of Job</mat-label>
+                    <mat-select formControlName="jobType">
+                        <mat-option *ngFor="let type of jobTypes" [value]="type">{{ type }}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -48,42 +48,28 @@
         <div class="row">
             <div class="col">
                 <mat-form-field appearance="fill">
-                    <mat-label>Enter Location of Job</mat-label>
-                    <input type="text" matInput placeholder="Job Location">
+                    <mat-label for="jobLocation">Enter Location of Job</mat-label>
+                    <input type="text" matInput placeholder="Job Location" id="jobLocation" formControlName="jobLocation">
                 </mat-form-field>
             </div>
             <div class="col">
                 <mat-form-field>
-                    <mat-label>Job Posted Date</mat-label>
-                    <input matInput [matDatepicker]="datepicker">
+                    <mat-label for="jobPostedDate">Job Posted Date</mat-label>
+                    <input matInput [matDatepicker]="datepicker" id="jobPostedDate" formControlName="jobPostedDate">
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
                     <mat-datepicker #datepicker>
                         <mat-datepicker-actions>
-                            <button mat-button matDatepickerCancel>Cancel</button>
-                            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            <button mat-button matDatepickerCancel id="cancel-btn">Cancel</button>
+                            <button mat-raised-button color="primary" matDatepickerApply id="apply-btn">Apply</button>
                         </mat-datepicker-actions>
                     </mat-datepicker>
                 </mat-form-field>
             </div>
             <div class="col">
-                <mat-form-field appearance="fill">
-                    <mat-label>About the Company</mat-label>
-                    <input type="text" matInput placeholder="Company Description">
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
                 <mat-form-field>
-                    <mat-label>About the Role</mat-label>
-                    <textarea matInput></textarea>
-                </mat-form-field>
-            </div>
-            <div class="col">
-                <mat-form-field>
-                    <mat-label>Application deadline date</mat-label>
-                    <input matInput [matDatepicker]="deadlineDatepicker">
+                    <mat-label for="jobDeadlineDate">Application deadline date</mat-label>
+                    <input matInput [matDatepicker]="deadlineDatepicker" id="jobDeadlineDate" formControlName="jobDeadlineDate">
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="deadlineDatepicker"></mat-datepicker-toggle>
                     <mat-datepicker #deadlineDatepicker>
@@ -94,29 +80,41 @@
                     </mat-datepicker>
                 </mat-form-field>
             </div>
+        </div>
+        <div class="row">
             <div class="col">
                 <mat-form-field>
-                    <mat-label>Enter Job Location Address</mat-label>
-                    <input type="text" matInput placeholder="Job Location Address">
+                    <mat-label for="referralEmployeeName">Enter Referred Employee Name</mat-label>
+                    <input type="text" matInput placeholder="Referred Employee Name" id="referralEmployeeName" formControlName="referralEmployeeName">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label for="applicationStatus">Select Application Status</mat-label>
+                    <mat-select formControlName="applicationStatus">
+                        <mat-option *ngFor="let applicationStatus of applicationStatusDropdown" [value]="applicationStatus">{{ applicationStatus }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="jobApplicationForm.get('applicationStatus')?.hasError('required')">Application Status is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field>
+                    <mat-label for="jobAddress">Enter Job Location Address</mat-label>
+                    <input type="text" matInput placeholder="Job Location Address" id="jobAddress" formControlName="jobAddress">
                 </mat-form-field>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <mat-form-field>
-                    <mat-label>Enter Referred Employee Name</mat-label>
-                    <input type="text" matInput placeholder="Referred Employee Name">
+                    <mat-label for="positionSummary">About the Role</mat-label>
+                    <textarea matInput id="positionSummary" formControlName="positionSummary" cdkTextareaAutosize #autosize="cdkTextareaAutosize"></textarea>
                 </mat-form-field>
             </div>
             <div class="col">
-                <mat-form-field>
-                    <mat-label>Select Application Status</mat-label>
-                    <mat-select>
-                        <mat-option value="Applied">Applied</mat-option>
-                        <mat-option value="Rejected">Rejected</mat-option>
-                        <mat-option value="Shortlisted">Shortlisted</mat-option>
-                        <mat-option value="Interview stage">Interview stage</mat-option>
-                    </mat-select>
+                <mat-form-field appearance="fill">
+                    <mat-label for="companyDescription">About the Company</mat-label>
+                    <textarea matInput placeholder="Company Description" id="companyDescription" formControlName="companyDescription" cdkTextareaAutosize #autosize="cdkTextareaAutosize"></textarea>
                 </mat-form-field>
             </div>
         </div>

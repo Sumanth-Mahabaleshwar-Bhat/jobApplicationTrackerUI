@@ -23,9 +23,13 @@ export const routes: Routes = [
         component: JobApplicationTrackerListComponent
     },
     {
-        path: "jobApplicationDetail",
+        path: "jobList/new",
         component: JobApplicationTrackerDetailComponent
-    }
+    },
+    {
+        path: "jobList/:jobRequisitionId",
+        component: JobApplicationTrackerDetailComponent
+    },
 ];
 
 @NgModule({

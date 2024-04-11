@@ -13,3 +13,24 @@ table {
     padding: 5px;
     width: 15%;
 }
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.header-title {
+    margin: 0;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.menu-container {
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+}
